@@ -1,0 +1,47 @@
+table customers
+	lineageTag: 7240578c-3792-4fa5-8c87-94f3284ed5b0
+
+	column customer_id
+		dataType: string
+		lineageTag: 98e7f1d5-2781-4f2b-9492-c93f5a186cc5
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column signup_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8ed533ac-fa37-45ba-aea2-095f3f962659
+		summarizeBy: none
+		sourceColumn: signup_date
+
+		variation Variation
+			isDefault
+			relationship: 4588a3d3-fc0b-4558-9cba-e0ceb3e72fb0
+			defaultHierarchy: LocalDateTable_018b467c-d024-4e79-8068-80709cc43f92.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column city
+		dataType: string
+		lineageTag: 525ac598-5d9e-447d-b06b-46e7d07625c1
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\padhy\OneDrive\Documents\Myntra_E-com_Dashboard\customers.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customer_id", type text}, {"signup_date", type date}, {"city", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

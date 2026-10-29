@@ -1,0 +1,155 @@
+table orders
+	lineageTag: 894e13f2-e690-4a2b-80a2-bd8ad900d1e6
+
+	measure 'Total Sales (M)' = ```
+			DIVIDE([Total Sales], 1000000)
+			
+			```
+		lineageTag: 03a37a8b-8f88-4573-9835-3403c03417c1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Orders' = ```
+			COUNTROWS(orders)
+			
+			```
+		formatString: 0
+		lineageTag: 2fccec7c-24db-4caa-91ff-85211fe1e4a2
+
+	measure 'Total Orders (K)' = ```
+			FORMAT([Total Orders]/1000, "0.00") & "K"
+			
+			```
+		lineageTag: cbc7fdd3-438b-401a-be85-32b72f328a2f
+
+	measure 'Total Customers' = ```
+			DISTINCTCOUNT(customers[customer_id])
+			
+			```
+		formatString: 0
+		lineageTag: aacfd4a8-a6df-4476-80c2-c6e59ae4c0cb
+
+	measure 'Active Brands' = ```
+			CALCULATE(COUNTROWS(brands), brands[is_active] = TRUE)
+			
+			```
+		formatString: 0
+		lineageTag: ec78d65b-1c4a-47dd-8048-6f5c66502511
+
+	measure 'Avg Rating' = AVERAGE(orders[rating])
+		lineageTag: dbfb4290-318f-4448-b53e-ea7246885e54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales(M.)' =
+			
+			"₹" & FORMAT([Total Sales] / 1000000, "0") & "M"
+		lineageTag: 2c608b40-0a38-4778-8db4-dc12b3d67b26
+
+	measure 'Total Sales' =
+			
+			SUM(orders[sale_amount])
+		lineageTag: f7cbbf5c-17e7-4f7c-aa34-0c5b5e9c261f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_id
+		dataType: string
+		lineageTag: 883350c7-4e0c-49db-9e7c-4f9b25183a3e
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 69ad48a9-de7e-43c7-8a0f-fba4fb1d8bc0
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column time_of_day
+		dataType: string
+		lineageTag: 79004533-3ef4-49cf-9119-2b4464617792
+		summarizeBy: none
+		sourceColumn: time_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 3a7d64ff-7536-4036-8f78-cf67c5dfef33
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 2c350ebb-640d-4ede-95dd-a275d1f0a9bf
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 583a9630-2b3e-4537-846c-7fd9d2be3940
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand_id
+		dataType: string
+		lineageTag: 00acb5c6-6b2a-4c1f-97ce-2ec50d6acb89
+		summarizeBy: none
+		sourceColumn: brand_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: bf29734b-5a3e-4052-9a38-1f93a6c80ba1
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column sale_amount
+		dataType: double
+		lineageTag: b5fbfb7b-2167-417a-b1c4-2f1dad16ac18
+		summarizeBy: sum
+		sourceColumn: sale_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rating
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ed461e6-17e0-4cb8-9edd-7bac1cec0e7f
+		summarizeBy: sum
+		sourceColumn: rating
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\padhy\OneDrive\Documents\Myntra_E-com_Dashboard\orders.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", type text}, {"order_date", type date}, {"time_of_day", type text}, {"customer_id", type text}, {"city", type text}, {"category", type text}, {"brand_id", type text}, {"channel", type text}, {"sale_amount", type number}, {"rating", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

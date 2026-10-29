@@ -1,0 +1,22 @@
+relationship 4588a3d3-fc0b-4558-9cba-e0ceb3e72fb0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: customers.signup_date
+	toColumn: LocalDateTable_018b467c-d024-4e79-8068-80709cc43f92.Date
+
+relationship AutoDetected_cccc8a50-0170-4af0-9892-75cf3e743f34
+	fromColumn: orders.brand_id
+	toColumn: brands.brand_id
+
+relationship AutoDetected_e7540a2e-bea6-45c5-9751-f21c0561ce00
+	fromColumn: orders.customer_id
+	toColumn: customers.customer_id
+
+relationship 19901e92-5f14-4e42-b91a-630825110da5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date_dimension_table.Date
+	toColumn: LocalDateTable_7f1d0850-65c3-47b3-803c-4bded1c315c6.Date
+
+relationship b44d3f1e-be94-6d0c-d4a5-15f99b64551e
+	fromColumn: orders.order_date
+	toColumn: Date_dimension_table.Date
+

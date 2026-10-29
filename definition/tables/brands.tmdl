@@ -1,0 +1,48 @@
+table brands
+	lineageTag: f790229b-9d49-4145-872e-2fd3b7d3128a
+
+	column brand_id
+		dataType: string
+		lineageTag: 333dc885-0980-48a4-ac3a-9bf1db2f94f3
+		summarizeBy: none
+		sourceColumn: brand_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand_name
+		dataType: string
+		lineageTag: 986883c4-3cd4-4d3e-a47b-bab7e9898813
+		summarizeBy: none
+		sourceColumn: brand_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column primary_category
+		dataType: string
+		lineageTag: 3c5399ca-9840-4078-86c4-23ec8f9d68c8
+		summarizeBy: none
+		sourceColumn: primary_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_still_active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 056643a9-5dd0-460d-8e06-4ff7a5df268b
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition brands = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\padhy\OneDrive\Documents\Myntra_E-com_Dashboard\brands.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"brand_id", type text}, {"brand_name", type text}, {"primary_category", type text}, {"is_active", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

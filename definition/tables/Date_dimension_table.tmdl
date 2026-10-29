@@ -1,0 +1,63 @@
+table Date_dimension_table
+	lineageTag: c6714f08-b942-4794-a050-c50d5cccfe0b
+
+	column Date
+		formatString: General Date
+		lineageTag: 54455315-5249-477a-bab5-08096bb2261f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 19901e92-5f14-4e42-b91a-630825110da5
+			defaultHierarchy: LocalDateTable_7f1d0850-65c3-47b3-803c-4bded1c315c6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR(Date_dimension_table[Date])
+		formatString: 0
+		lineageTag: bab7c1b0-e83e-4b25-96a3-b3cdd561baad
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH(Date_dimension_table[Date])
+		formatString: 0
+		lineageTag: bc413dbb-3262-419b-8632-ab4c975c27ed
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT(Date_dimension_table[Date], "MMMM")
+		lineageTag: 0fa42774-d232-4e41-9c30-084ce0d881af
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = "Q" & FORMAT(Date_dimension_table[Date], "Q")
+		lineageTag: fa63503c-ef85-4516-bf51-1bf37813b0e9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day = DAY(Date_dimension_table[Date])
+		formatString: 0
+		lineageTag: 27d7e443-4a02-478f-aae5-5d1c61bb4e37
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday = FORMAT(Date_dimension_table[Date], "dddd")
+		lineageTag: 0dd8c8c4-2e3b-41a6-85b3-a53527b271dc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date_dimension_table = calculated
+		mode: import
+		source = CALENDARAUTO()
+
+	annotation PBI_Id = 9c96e2d0799c4be2a2e8efe6bdfbb821
+
