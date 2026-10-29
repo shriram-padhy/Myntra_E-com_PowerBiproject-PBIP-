@@ -1,0 +1,118 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY26SU05",
+      "reportVersionAtImport": {
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Myntra_Analytics_Dark033995063468449715.json",
+      "reportVersionAtImport": {
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY26SU05",
+          "path": "BaseThemes/CY26SU05.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "ChatGPT_Image_Aug_6,_2026,_08_8795038494676463.png",
+          "path": "ChatGPT_Image_Aug_6,_2026,_08_8795038494676463.png",
+          "type": "Image"
+        },
+        {
+          "name": "ChatGPT_Image_Aug_6,_2026,_10_5038992805117553.png",
+          "path": "ChatGPT_Image_Aug_6,_2026,_10_5038992805117553.png",
+          "type": "Image"
+        },
+        {
+          "name": "Myntra_Analytics_Dark033995063468449715.json",
+          "path": "Myntra_Analytics_Dark033995063468449715.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "Screenshot_2026-08-06_1923085869260465399994.png",
+          "path": "Screenshot_2026-08-06_1923085869260465399994.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2026-08-06_1923173962344048422529.png",
+          "path": "Screenshot_2026-08-06_1923173962344048422529.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2026-08-06_19232944901577296898754.png",
+          "path": "Screenshot_2026-08-06_19232944901577296898754.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2026-08-06_1924024535898081084121.png",
+          "path": "Screenshot_2026-08-06_1924024535898081084121.png",
+          "type": "Image"
+        },
+        {
+          "name": "Screenshot_2026-08-06_1935019642060817805382.png",
+          "path": "Screenshot_2026-08-06_1935019642060817805382.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}
